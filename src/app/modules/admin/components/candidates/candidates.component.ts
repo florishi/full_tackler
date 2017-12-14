@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CandidateService } from '../../services/candidate.service';
 
 @Component({
-  selector: 'app-candiadates',
-  templateUrl: './candiadates.component.html',
-  styleUrls: ['./candiadates.component.css']
+  selector: 'app-candidates',
+  templateUrl: './candidates.component.html',
+  styleUrls: ['./candidates.component.css']
 })
-export class CandiadatesComponent implements OnInit {
+export class CandidatesComponent implements OnInit {
 public candidates;
 
   constructor(private _candidates: CandidateService) { }

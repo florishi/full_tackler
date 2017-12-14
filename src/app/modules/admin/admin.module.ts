@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard-admin/dashboard-admin.component';
-import { CandiadatesComponent } from './components/candiadates/candiadates.component';
+import { CandidatesComponent } from './components/candidates/candidates.component';
 import { AdminComponent } from './admin.component';
 import { MaterialModule } from '../../material/material.module';
 import { EmployeesComponent } from './components/employees/employees.component';
@@ -27,7 +27,7 @@ import { TechnologyService } from './services/technology.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [DashboardComponent, CandiadatesComponent, AdminComponent, EmployeesComponent, NavbarComponent, CreateCandidateComponent],
+  declarations: [DashboardComponent, CandidatesComponent, AdminComponent, EmployeesComponent, NavbarComponent, CreateCandidateComponent],
   bootstrap: [AdminComponent],
   providers: [DashboardService, CandidateService, EmployeesService, TechnologyService]
 })

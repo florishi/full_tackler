@@ -21,7 +21,7 @@ private _url: string;
             headers: headers,
             responseType: 'json'
         };
-    this._url = 'http://localhost:3030/admin/candidates';
+    this._url = 'http://localhost:3030/admin/candidate/list';
     return this._http.get(this._url)
     .catch(this.handleError);
   }
@@ -43,6 +43,12 @@ private _url: string;
         }; */
     this._url = 'http://localhost:3030/admin/candidate/create';
     return this._http.post(this._url, payload)
+    .catch(this.handleError);
+  }
+
+  getTable(): Observable<any> {
+    this._url = 'http://localhost:3030/admin/candidate/getTable';
+    return this._http.get(this._url)
     .catch(this.handleError);
   }
 
