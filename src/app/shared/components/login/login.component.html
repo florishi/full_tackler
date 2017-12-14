@@ -1,0 +1,6 @@
+<button md-button color="primary" *ngIf="!auth.loggedIn" (click)="auth.login()">LogIn</button>
+
+<span *ngIf="auth.loggedIn">
+  {{auth.userProfile?.name}} <span class="opacity-half">|</span> <a (click)="auth.logout()">Log Out</a>
+</span>
+
