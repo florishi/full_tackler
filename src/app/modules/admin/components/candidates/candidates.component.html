@@ -1,3 +1,36 @@
 <div class="pull-right" style="margin-top: 10px; margin-right: 10px" >
 <button mat-fab color="primary" [routerLink]="['/admin/candidates/create']"><mat-icon>add</mat-icon></button>
 </div>
+
+<div class="center_div">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let candiadate"> {{candiadate.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let candidate"> {{candidate.email}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Technology">
+      <mat-header-cell *matHeaderCellDef>Technology</mat-header-cell>
+      <mat-cell *matCellDef="let candidate"> {{candidate.technology}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CreatedDate">
+      <mat-header-cell *matHeaderCellDef>Created Date</mat-header-cell>
+      <mat-cell *matCellDef="let candidate"> {{candidate.updated  | date: 'dd-MM-yyyy'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let candidate"> {{candidate.active === true ? 'active' : 'inactive'}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="HrDetails">
+      <mat-header-cell *matHeaderCellDef>HrDetails</mat-header-cell>
+      <mat-cell *matCellDef="let candidate">
+         {{candidate.employee.firstName}} {{candidate.employee.lastName}} - {{candidate.employee.designation}}
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

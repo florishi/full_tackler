@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
+import { HrTable } from '../interfaces/hr-table';
+
 @Injectable()
 export class CandidateService {
 private _url: string;
@@ -46,10 +48,29 @@ private _url: string;
     .catch(this.handleError);
   }
 
-  getTable(): Observable<any> {
+  getTable(): Observable<HrTable[]> {
     this._url = 'http://localhost:3030/admin/candidate/getTable';
-    return this._http.get(this._url)
+    return this._http.get<HrTable[]>(this._url)
+    .map(this._mapTable)
     .catch(this.handleError);
+  }
+
+  private _mapTable(response) {
+    return response.map( item => {
+      return ({
+      id: item._id,
+      name: item.name,
+      email: item.email,
+      technology: item.technology.name,
+      updated: item.updated,
+      active: item.active,
+      employee: {
+        firstName: item.employee.employee_details.firstName,
+        lastName: item.employee.employee_details.lastName,
+        designation: item.employee.designation.name
+      }
+      });
+    });
   }
 
   private handleError(err: HttpErrorResponse) {
