@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeesService } from '../../services/employees.service';
+import {MatTableDataSource} from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { DataSource } from '@angular/cdk/collections';
+
+import { CandidateService } from '../../services/candidate.service';
+import { HrCandidateTable } from '../../interfaces/hr-candidate-table';
 
 @Component({
   selector: 'app-employees',
@@ -7,22 +12,21 @@ import { EmployeesService } from '../../services/employees.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
+  displayedColumns: Array<string> = ['Name', 'CreatedDate', 'Status'];
+  dataSource = new CandidateTableDataSource(this._candidates);
 
-  constructor(private _employees: EmployeesService) { }
+  constructor(private _candidates: CandidateService) { }
 
-  ngOnInit() {
-  }
-
-  getCandidates(): void {
-    this._employees.getEmployees()
-    .subscribe(
-      data => {
-        this._employees = data;
-        console.log(data);
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
+  ngOnInit() { }
 }
+
+export class CandidateTableDataSource extends DataSource<any> {
+  constructor(private _candidates: CandidateService) {
+    super();
+  }
+  connect(): Observable<HrCandidateTable[]> {
+    return this._candidates.getCandidates();
+  }
+  disconnect() {}
+}
+

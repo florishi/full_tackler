@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 import { HrTable } from '../interfaces/hr-table';
+import { HrCandidateTable } from '../interfaces/hr-candidate-table';
 
 @Injectable()
 export class CandidateService {
@@ -10,7 +11,7 @@ private _url: string;
 
   constructor(private _http: HttpClient) { }
 
-  getCandidates(): Observable<any> {
+  getCandidates(): Observable<HrCandidateTable[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const options: {
             headers?: HttpHeaders,
@@ -24,7 +25,7 @@ private _url: string;
             responseType: 'json'
         };
     this._url = 'http://localhost:3030/admin/candidate/list';
-    return this._http.get(this._url)
+    return this._http.get<HrCandidateTable[]>(this._url)
     .catch(this.handleError);
   }
 
