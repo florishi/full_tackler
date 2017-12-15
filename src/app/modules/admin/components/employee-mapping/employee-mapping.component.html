@@ -1,0 +1,42 @@
+<div class="center_div">
+    <mat-card>
+    <mat-card-header>
+      <mat-card-title><strong>Candidate Creation</strong></mat-card-title>
+    </mat-card-header>
+    <form [formGroup]='candidateForm' (ngSubmit)="onSubmit(candidateForm.value)" novalidate>
+      <mat-card-content>
+        <mat-form-field [floatLabel]=floatLabel>
+          <input formControlName="_id" matInput placeholder="id" readonly>
+          <mat-error *ngIf="!isValidId() && candidateForm.controls['_id'].errors?.required">
+              Please enter a name
+            </mat-error>
+          </mat-form-field>
+            <mat-select formControlName="employee" placeholder="Employee" style="margin-top: 10px">
+              <mat-option *ngFor="let employee of _employees" [value]="employee._id">
+                {{employee.firstName.toLocaleUpperCase()}} {{employee.lastName.toLocaleUpperCase()}} - {{employee.designation}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="!isValidEmployee() && candidateForm.controls['employee'].errors?.required">
+                Please choose a Employee
+            </mat-error>
+            <mat-select formControlName="level" placeholder="Level" style="margin-top: 20px">
+              <mat-option *ngFor="let level of _levels" [value]="level._id">
+                {{level.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="!isValidLevel() && candidateForm.controls['level'].errors?.required">
+              Please choose a Level
+            </mat-error>
+            <mat-form-field><!-- have to add date with max date too -->
+                <input matInput [min]="today" [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi="true" #picker></mat-datepicker>
+            </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">add</button>
+          <button mat-raised-button color="primary" [routerLink]="['/admin/activeCandidates']" >cancel</button>
+      </mat-card-actions>
+    </form>
+    </mat-card>
+  </div>

@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse, HttpResponse } 
 import 'rxjs/add/operator/map';
 
 import { HrEmployee } from '../interfaces/hr-employee';
+import { EmployeeDetails } from '../interfaces/employee-details';
+
 @Injectable()
 export class EmployeesService {
 private _url: string;
@@ -53,6 +55,26 @@ private _url: string;
         id: item._id,
         firstName: item.employee_details.firstName,
         lastName: item.employee_details.lastName,
+        designation: item.designation.name
+      });
+    });
+  }
+
+  getAllEmployeeDetails(): Observable<EmployeeDetails[]> {
+    this._url = 'http://localhost:3030/admin/employee/allEmployeesDetails';
+    return this._http.get<Observable<EmployeeDetails[]>>(this._url)
+    .map(this._employeeDetails)
+    .catch(this._handleError);
+  }
+
+
+  private _employeeDetails(response) {
+    return response.map(item => {
+      return ({
+        _id: item._id,
+        firstName: item.employee_details.firstName,
+        lastName: item.employee_details.lastName,
+        department: item.department.name,
         designation: item.designation.name
       });
     });

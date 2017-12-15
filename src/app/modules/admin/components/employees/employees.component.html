@@ -2,7 +2,9 @@
     <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="Name">
         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let candiadate"> {{candiadate.name}} </mat-cell>
+        <mat-cell *matCellDef="let candidate">
+         <a [routerLink]="['/admin/employee-mapping', candidate._id]">{{candidate.name}}</a>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="CreatedDate">
         <mat-header-cell *matHeaderCellDef>Created Date</mat-header-cell>

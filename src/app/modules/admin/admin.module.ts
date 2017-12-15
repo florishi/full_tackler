@@ -16,6 +16,8 @@ import { CandidateService } from './services/candidate.service';
 import { EmployeesService } from './services/employees.service';
 import { CreateCandidateComponent } from './components/create-candidate/create-candidate.component';
 import { TechnologyService } from './services/technology.service';
+import { EmployeeMappingComponent } from './components/employee-mapping/employee-mapping.component';
+import { LevelService } from './services/level.service';
 
 @NgModule({
   imports: [
@@ -27,8 +29,21 @@ import { TechnologyService } from './services/technology.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [DashboardComponent, CandidatesComponent, AdminComponent, EmployeesComponent, NavbarComponent, CreateCandidateComponent],
+  declarations: [
+    DashboardComponent,
+    CandidatesComponent,
+    AdminComponent,
+    EmployeesComponent,
+    NavbarComponent,
+    CreateCandidateComponent,
+    EmployeeMappingComponent
+  ],
   bootstrap: [AdminComponent],
-  providers: [DashboardService, CandidateService, EmployeesService, TechnologyService]
+  providers: [
+    DashboardService,
+    CandidateService,
+    EmployeesService,
+    TechnologyService,
+    LevelService]
 })
 export class AdminModule { }

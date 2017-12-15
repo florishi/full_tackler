@@ -6,6 +6,7 @@ import { CandidatesComponent } from '../admin/components/candidates/candidates.c
 import { AdminComponent } from './admin.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { CreateCandidateComponent } from './components/create-candidate/create-candidate.component';
+import { EmployeeMappingComponent } from './components/employee-mapping/employee-mapping.component';
 
 /*
 add the auth guard for all the children in the parent path
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'activeCandidates',
         component: EmployeesComponent
+      },
+      {
+        path: 'employee-mapping/:id',
+        component: EmployeeMappingComponent
       }
     ]
   },
