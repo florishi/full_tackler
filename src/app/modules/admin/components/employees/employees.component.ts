@@ -25,7 +25,7 @@ export class CandidateTableDataSource extends DataSource<any> {
     super();
   }
   connect(): Observable<HrCandidateTable[]> {
-    return this._candidates.getCandidates();
+    return this._candidates.getActiveCandidates();
   }
   disconnect() {}
 }

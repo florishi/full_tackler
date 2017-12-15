@@ -29,6 +29,24 @@ private _url: string;
     .catch(this.handleError);
   }
 
+  getActiveCandidates(): Observable<HrCandidateTable[]> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const options: {
+            headers?: HttpHeaders,
+            observe?: 'body',
+            params?: HttpParams,
+            reportProgress?: boolean,
+            responseType: 'json',
+            withCredentials?: boolean
+        } = {
+            headers: headers,
+            responseType: 'json'
+        };
+    this._url = 'http://localhost:3030/admin/candidate/listActive';
+    return this._http.get<HrCandidateTable[]>(this._url)
+    .catch(this.handleError);
+  }
+
   createCandidate(payload): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     /* const options: {

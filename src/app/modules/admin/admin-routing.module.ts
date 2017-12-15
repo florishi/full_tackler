@@ -30,7 +30,7 @@ const routes: Routes = [
         component: CandidatesComponent
       },
       {
-        path: 'employees-mapping',
+        path: 'activeCandidates',
         component: EmployeesComponent
       }
     ]
