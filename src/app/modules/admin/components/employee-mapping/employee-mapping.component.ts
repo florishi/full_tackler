@@ -113,12 +113,11 @@ maxDate: Date;
       this._candidate_progress.createCandidate(values)
       .subscribe(
         data => {
-          console.log(data);
-          this._openSnackBar('Candidate Progress', 'Success');
+          this._router.navigate(['/admin/activeCandidates']);
+          this._openSnackBar('Employee Assignment', 'Success');
         },
         err => {
-          console.log(err);
-          this._openSnackBar('Information Correction', 'Failed');
+          this._openSnackBar(err, 'Failed');
         }
       );
     }else {
