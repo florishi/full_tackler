@@ -18,6 +18,7 @@ import { CreateCandidateComponent } from './components/create-candidate/create-c
 import { TechnologyService } from './services/technology.service';
 import { EmployeeMappingComponent } from './components/employee-mapping/employee-mapping.component';
 import { LevelService } from './services/level.service';
+import { CandidateProgressService } from './services/candidate-progress.service';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { LevelService } from './services/level.service';
     CandidateService,
     EmployeesService,
     TechnologyService,
-    LevelService]
+    LevelService,
+    CandidateProgressService]
 })
 export class AdminModule { }

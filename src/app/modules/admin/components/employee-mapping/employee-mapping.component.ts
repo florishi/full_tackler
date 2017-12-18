@@ -7,6 +7,7 @@ import { LevelService } from '../../services/level.service';
 import { EmployeesService } from '../../services/employees.service';
 import { Level } from '../../interfaces/level';
 import { EmployeeDetails } from '../../interfaces/employee-details';
+import { CandidateProgressService } from '../../services/candidate-progress.service';
 
 @Component({
   selector: 'app-employee-mapping',
@@ -30,6 +31,7 @@ maxDate: Date;
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _levelService: LevelService,
+    private _candidate_progress: CandidateProgressService,
     private _employeeService: EmployeesService) { }
 
     ngOnInit() {
@@ -87,7 +89,6 @@ maxDate: Date;
     .subscribe(
       data => {
         this._levels = data;
-        console.log(this._levels);
       },
       err => {
         console.log(err);
@@ -100,7 +101,6 @@ maxDate: Date;
     .subscribe(
       data => {
         this._employees = data;
-        console.log(this._employees);
       },
       err => {
         console.log(err);
@@ -110,7 +110,17 @@ maxDate: Date;
 
   onSubmit(values): void {
     if (this.candidateForm.valid) {
-      console.log(values);
+      this._candidate_progress.createCandidate(values)
+      .subscribe(
+        data => {
+          console.log(data);
+          this._openSnackBar('Candidate Progress', 'Success');
+        },
+        err => {
+          console.log(err);
+          this._openSnackBar('Information Correction', 'Failed');
+        }
+      );
     }else {
       this._openSnackBar('Information Correction', 'Failed');
     }
