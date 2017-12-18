@@ -1,7 +1,7 @@
 <div class="center_div">
     <mat-card>
     <mat-card-header>
-      <mat-card-title><strong>Candidate Creation</strong></mat-card-title>
+      <mat-card-title><strong>Employee Allocation</strong></mat-card-title>
     </mat-card-header>
     <form [formGroup]='candidateForm' (ngSubmit)="onSubmit(candidateForm.value)" novalidate>
       <mat-card-content>
@@ -27,8 +27,8 @@
             <mat-error *ngIf="!isValidLevel() && candidateForm.controls['level'].errors?.required">
               Please choose a Level
             </mat-error>
-            <mat-form-field><!-- have to add date with max date too -->
-                <input matInput [min]="today" [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-form-field style="margin-top: 20px"><!-- no saturday and sunday  and maximum allocation time is 6 months from the current day -->
+                <input formControlName="date" matInput [min]="today"  [max]="maxDate" [matDatepickerFilter]="dateFilter" [matDatepicker]="picker" placeholder="Choose a date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker touchUi="true" #picker></mat-datepicker>
             </mat-form-field>

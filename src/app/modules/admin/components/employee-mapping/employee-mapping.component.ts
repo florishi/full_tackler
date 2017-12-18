@@ -19,10 +19,11 @@ candidateForm: FormGroup;
 private _id: FormControl;
 private _employee: FormControl;
 private _level: FormControl;
-/*private _date: FormControl; */
+private _date: FormControl;
 _levels: Level[] = [];
 _employees: EmployeeDetails[] = [];
-today = new Date();
+today: Date;
+maxDate: Date;
 
   constructor(
     public snackBar: MatSnackBar,
@@ -31,10 +32,13 @@ today = new Date();
     private _levelService: LevelService,
     private _employeeService: EmployeesService) { }
 
-  ngOnInit() {
-    this._getLevels();
-    this._getEmployeeDetails();
-    this._setProperties();
+    ngOnInit() {
+      this.today = new Date();
+      this.maxDate = new Date();
+      this.maxDate.setMonth(this.today.getMonth() + 6);
+      this._getLevels();
+      this._getEmployeeDetails();
+      this._setProperties();
   }
 
   private _openSnackBar(message: string, action: string) {
@@ -47,12 +51,12 @@ today = new Date();
     this._id = new FormControl(this._activatedRoute.snapshot.paramMap.get('id'), Validators.required);
     this._level = new FormControl((this._levels !== [] ? this._levels : ''), Validators.required);
     this._employee = new FormControl((this._employees !== [] ? this._employees : ''), Validators.required);
-    /*this._date = new FormControl('', Validators.required); */
+    this._date = new FormControl(this.today, Validators.required);
     this.candidateForm = new FormGroup({
       _id: this._id,
       employee: this._employee,
       level: this._level,
-      /*date: this._date */
+      date: this._date
     });
   }
 
@@ -68,9 +72,9 @@ today = new Date();
     return this._level.valid || this._level.untouched;
   }
 
-  /*isValidDate() {
+  isValidDate() {
     return this._date.valid || this._date.untouched;
-  } */
+  }
 
   dateFilter = (d: Date): boolean => {
     const day = d.getDay();
