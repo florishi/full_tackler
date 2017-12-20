@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 import { AuthAdminService } from './shared/services/auth-admin.service';
 import { AdminModule } from './modules/admin/admin.module';
 import { CallbackComponent } from './shared/components/pages/callback.component';
+import { InterviewerModule } from './modules/interviewer/interviewer.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CallbackComponent } from './shared/components/pages/callback.component'
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    InterviewerModule,
     AdminModule,
     AppRoutingModule
   ],
