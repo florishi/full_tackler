@@ -1,3 +1,35 @@
-<p>
-  dashboard works!
-</p>
+<strong>Active Candidates</strong>
+<div *ngIf="isValidActiveCandidateprogress();else active_content">
+<mat-card *ngFor="let activeCandidate of activeCandidateProgress" >
+    <mat-card-header>
+      <mat-card-title>
+        Name:{{activeCandidate.name}}
+        Technology:{{activeCandidate.technology}}
+      </mat-card-title>
+    </mat-card-header>
+      <!-- <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">add</button>
+          <button mat-raised-button color="primary" [routerLink]="['/admin/candidates']" >cancel</button>
+      </mat-card-actions> -->
+  </mat-card>
+</div>
+<ng-template #active_content>
+No Active Candidates
+</ng-template>
+
+<strong>Inactive Candidates</strong>
+<div *ngIf="isValidInActiveCandidateprogress();else inActive_content">
+  <mat-card *ngFor="let inActiveCandidate of inActiveCandidateProgress" >
+    <mat-card-header>
+      <mat-card-title>
+        Name:{{inActiveCandidate.name}}
+        Technology:{{inActiveCandidate.technology}}
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
+<ng-template #inActive_content>
+  No Inactive Candidates
+</ng-template>

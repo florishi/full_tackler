@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular
 
 import { HrTable } from '../interfaces/hr-table';
 import { HrCandidateTable } from '../interfaces/hr-candidate-table';
-
+import { HrDashboard } from '../interfaces/hr-dashboard';
 @Injectable()
 export class CandidateService {
 private _url: string;
@@ -45,6 +45,30 @@ private _url: string;
     this._url = 'http://localhost:3030/admin/candidate/listActive';
     return this._http.get<HrCandidateTable[]>(this._url)
     .catch(this.handleError);
+  }
+
+  getActiveCandidatesProgress(): Observable<HrDashboard[]> {
+    this._url = 'http://localhost:3030/admin/candidate/listActiveCandidate';
+    return this._http.get<HrDashboard[]>(this._url)
+    .map(this._mapCandidateprogress)
+    .catch(this.handleError);
+  }
+
+  getInActiveCandidatesProgress(): Observable<HrDashboard[]> {
+    this._url = 'http://localhost:3030/admin/candidate/listInActiveCandidate';
+    return this._http.get<HrDashboard[]>(this._url)
+    .map(this._mapCandidateprogress)
+    .catch(this.handleError);
+  }
+
+  private _mapCandidateprogress(response) {
+    return response.map( item => {
+      return ({
+        _id: item._id,
+        name: item.name,
+        technology: item.technology.name
+      });
+    });
   }
 
   createCandidate(payload): Observable<any> {
