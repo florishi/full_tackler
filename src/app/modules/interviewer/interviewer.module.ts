@@ -10,6 +10,7 @@ import { InterviewerComponent } from './interviewer.component';
 import { DashboardInterviewerComponent } from './components/dashboard-interviewer/dashboard-interviewer.component';
 import { QuestionsInterviewerComponent } from './components/questions-interviewer/questions-interviewer.component';
 import { NavbarInterviewerComponent } from './components/navbar-interviewer/navbar-interviewer.component';
+import { QuestionCategoryService } from './services/question-category.service';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { NavbarInterviewerComponent } from './components/navbar-interviewer/navb
   ],
   bootstrap: [
     InterviewerComponent
-  ]
+  ],
+  providers: [QuestionCategoryService]
 })
 export class InterviewerModule { }

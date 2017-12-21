@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
+import { Itechnology } from '../interfaces/itechnology';
 @Injectable()
 export class TechnologyService {
 private _url: string;
 
   constructor(private _http: HttpClient) { }
 
-  getCustomTechnologies(): Observable<any> {
+  getCustomTechnologies(): Observable<Itechnology[]> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const options: {
             headers?: HttpHeaders,
@@ -22,7 +23,7 @@ private _url: string;
             responseType: 'json'
         };
     this._url = 'http://localhost:3030/admin/technology/names';
-    return this._http.get(this._url)
+    return this._http.get<Itechnology[]>(this._url)
     .catch(this.handleError);
   }
 
@@ -40,7 +41,7 @@ private _url: string;
             responseType: 'json'
         };
     this._url = 'http://localhost:3030/admin/technology/list';
-    return this._http.get(this._url)
+    return this._http.get<any>(this._url)
     .catch(this.handleError);
   }
 

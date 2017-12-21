@@ -16,6 +16,12 @@ private _url: string;
     .catch(this._handleError);
   }
 
+  getActiveNames(): Observable<any> {
+    this._url = 'http://localhost:3030/admin/level/listActiveNames';
+    return this._http.get<any>(this._url)
+    .catch(this._handleError);
+  }
+
   private _handleError(err: HttpErrorResponse) {
     let error: Error;
     if (err.status === 400) {
