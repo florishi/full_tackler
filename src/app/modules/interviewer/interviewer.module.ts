@@ -11,6 +11,8 @@ import { DashboardInterviewerComponent } from './components/dashboard-interviewe
 import { QuestionsInterviewerComponent } from './components/questions-interviewer/questions-interviewer.component';
 import { NavbarInterviewerComponent } from './components/navbar-interviewer/navbar-interviewer.component';
 import { QuestionCategoryService } from './services/question-category.service';
+import { TechnologyService } from '../admin/services/technology.service';
+import { LevelService } from '../admin/services/level.service';
 
 @NgModule({
   imports: [
@@ -31,6 +33,6 @@ import { QuestionCategoryService } from './services/question-category.service';
   bootstrap: [
     InterviewerComponent
   ],
-  providers: [QuestionCategoryService]
+  providers: [QuestionCategoryService, TechnologyService, LevelService]
 })
 export class InterviewerModule { }

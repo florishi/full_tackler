@@ -1,3 +1,58 @@
-<p>
-  questions-interviewer works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><strong>Question Creation</strong></mat-card-title>
+  </mat-card-header>
+  <form [formGroup]='questionForm' (ngSubmit)="onSubmit(questionForm.value)" novalidate>
+    <mat-card-content>
+        <mat-select formControlName="level" placeholder="Level" style="margin-top: 10px">
+          <mat-option *ngFor="let level of levels" [value]="level._id">
+            {{level.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!isValidLevel() && questionForm.controls['level'].errors?.required">
+            Please choose a Level
+        </mat-error>
+        <mat-select formControlName="category" placeholder="Category" style="margin-top: 20px">
+          <mat-option *ngFor="let category of questionCategories" [value]="category._id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!isValidQuestionCategory() && questionForm.controls['category'].errors?.required">
+          Please choose a Level
+        </mat-error>
+        <mat-form-field [floatLabel]=floatLabel style="margin-top: 20px">
+          <input formControlName="name" type="text" matInput placeholder="Question">
+          <mat-error *ngIf="!isValidName() && questionForm.controls['name'].errors?.required">
+            Please enter the Question
+          </mat-error>
+        </mat-form-field>
+        <div *ngIf="isMulitpleChoice()">
+          <div *ngFor="let option of optionsNumber">
+            <mat-checkbox mat-prefix></mat-checkbox>
+            <mat-form-field [floatLabel]=floatLabel style="margin-left: 20px">
+              <input formControlName="options" type="text" matInput [value]="option" >
+              <mat-error *ngIf="!isValidName() && questionForm.controls['options'].errors?.required">
+                Please enter the Question
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="hasDefaultAnswer()" >
+          <mat-form-field [floatLabel]=floatLabel style="margin-top: 20px">
+              <input formControlName="defaultAnswer" type="text" matInput placeholder="Answer">
+              <mat-error *ngIf="!isValidDefaultAnswer() && questionForm.controls['defaultAnswer'].errors?.required">
+                Please enter the Question
+              </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- <mat-chip-list>
+          <mat-chip>option 1</mat-chip>
+          <mat-chip>option 2</mat-chip>
+        </mat-chip-list> -->
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">add</button>
+        <button mat-raised-button color="primary" [routerLink]="['/admin/activeCandidates']" >cancel</button>
+    </mat-card-actions>
+  </form>
+  </mat-card>
